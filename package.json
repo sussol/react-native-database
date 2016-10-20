@@ -1,11 +1,14 @@
 {
   "name": "react-native-database",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A nicer interface for the react native flavour of realm",
   "repository": "https://github.com/sussol/react-native-database.git",
   "author": "Sustainable Solutions (NZ) Ltd.",
   "license": "MIT",
   "main": "index.js",
+  "dependencies": {
+    "react-native-uuid": "^1.4.8"
+  },
   "devDependencies": {
     "babel-core": "^6.17.0",
     "babel-eslint": "^6.1.2",
