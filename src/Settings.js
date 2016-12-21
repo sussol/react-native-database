@@ -27,8 +27,11 @@ export class Settings {
 
   delete(key) {
     this.database.write(() => {
-      const setting = this.get(key);
-      this.database.delete('Setting', setting);
+      const results = this.database.objects('Setting').filtered('key == $0', key);
+      if (results && results.length > 0) {
+        const setting = results[0];
+        this.database.delete('Setting', setting);
+      }
     });
   }
 
