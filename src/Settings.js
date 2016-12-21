@@ -25,6 +25,13 @@ export class Settings {
     });
   }
 
+  delete(key) {
+    this.database.write(() => {
+      const setting = this.get(key);
+      this.database.delete('Setting', setting);
+    });
+  }
+
   get(key) {
     const results = this.database.objects('Setting').filtered('key == $0', key);
     if (results && results.length > 0) return results[0].value;
