@@ -1,19 +1,25 @@
+import { Database } from './Database';
+
+// The format of a Setting table, which is required in the dtabase for Settings to work
+export const SettingSchema = {
+  name: 'Setting',
+  primaryKey: 'key',
+  properties: {
+    key: 'string',
+    value: 'string',
+  },
+};
+
 /**
  * Maintains storage of application settings. Takes in a realm database in the
- * constructor, which should have a 'Setting' table in the schema as described
- * below.
- * {
- * 		name: 'Setting',
- *  	primaryKey: 'key',
- *  	properties: {
- *   		key: 'string',
- *      value: 'string'
- *    }
- * }
+ * constructor, which should have a 'Setting' table in the schema as exported
+ * above. If no database is passed in, one will be constructed with a Setting
+ * table only.
  */
 export class Settings {
   constructor(database) {
-    this.database = database;
+    if (database) this.database = database;
+    else this.database = new Database({ schema: [SettingSchema], schemaVersion: 1 });
   }
 
   set(key, value) {
