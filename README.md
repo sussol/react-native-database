@@ -8,8 +8,8 @@ Requires that [Realm](http://realm.io) is also installed, if not:
 
 ## Usage
 This library contains two components, which can be used independently or in parallel
-* Database - Provides a simple wrapper around Realm, adding fine-grained notifications
-* Settings - An interface for easily maintaining app settings in local storage, without any extra database clutter
+* [Database](#database) - Provides a simple wrapper around Realm, adding fine-grained notifications
+* [Settings](#settings) - An interface for easily maintaining app settings in local storage, without any extra database clutter
 
 ### Database
 
