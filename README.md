@@ -1,10 +1,10 @@
 # react-native-database
 
 ## Installation
-```npm install --save react-native-database```
+`npm install --save react-native-database`
 
-Requires that [Realm](http://realm.io) is also installed, if not:
-```npm install --save realm```
+Requires that [Realm](http://realm.io) is also installed, if not:  
+`npm install --save realm`
 
 ## Usage
 This library contains two components, which can be used independently or in parallel
@@ -63,7 +63,8 @@ console.log(`Hello ${settings.get('CurrentUserName')}!`); // Will print 'Hello E
 #### Using in conjunction with a database
 If you need to store extra data, pass through a realm database including a 'Setting' table on construction. Note that this could be a react-native-database Database rather than a raw realm database.
 
-```import { Database, Settings } from 'react-native-database';
+```
+import { Database, Settings } from 'react-native-database';
 class Setting {};
 Setting.schema = {
   name: 'Setting',
@@ -93,3 +94,4 @@ database.write(() => { database.create('User', { id: '54321', username: 'edmofro
 settings.set('CurrentUserId', '54321');
 const currentUserId = settings.get('CurrentUserId')```
 console.log(`Hello ${database.objects('User').filter(`id = ${settings.get('CurrentUserId')}`)[0].firstName}!`); // Will print 'Hello Edwin!'
+```
