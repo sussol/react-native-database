@@ -71,13 +71,10 @@ export class Database {
    * @return {none}
    */
   delete(type, object, ...listenerArgs) {
-    let objects = [object];
-
-    // If object is an array, a realm list, or a realm results object, use it directly
-    if (Array.isArray(object) ||
-        object.toString() === '[object List]' ||
-        object.toString() === '[object Results]'
-      ) objects = object;
+    // Test if the object is a RealmObject by checking if it has the function objectSchema(). If it
+    // is, stick it in an array. Otherwise, objet is an array, a realm list, or a realm results
+    // object, so just slice it to make sure it is a simple array
+    const objects = typeof object.objectSchema === 'function' ? [object] : object.slice();
 
     // If empty, ignore
     if (!objects || objects.length === 0) return;
