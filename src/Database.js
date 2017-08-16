@@ -16,6 +16,15 @@ export class Database {
   }
 
   /**
+   * Indicates if this database contains any objects
+   * N.B. relies on realm 1.10.0 or greater
+   * @return {boolean}  Whether the database is empty
+   */
+  getIsEmpty() {
+    return this.realm.empty;
+  }
+
+  /**
    * Adds a function to the array of functions to call when the database changes.
    * @param {Function} callback Function to call when a change is made to the
    *                            database. Should expect a change type, record type,
