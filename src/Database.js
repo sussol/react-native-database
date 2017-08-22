@@ -72,6 +72,22 @@ export class Database {
   }
 
   /**
+   * Returns the database object with the given id, if it exists, or creates a
+   * placeholder with that id if it doesn't.
+   * @param  {string} type             The type of database object
+   * @param  {string} primaryKey       The primary key of the database object, usually its id
+   * @param  {string} primaryKeyField  The field used as the primary key, defaults to 'id'
+   * @return {Realm.object}            Either the existing database object with the given
+   *                                   primary key, or a placeholder if none
+   */
+  getOrCreate(type, primaryKey, primaryKeyField = 'id', ...listenerArgs) {
+    if (!primaryKey || primaryKey.length < 1) return null;
+    const results = this.objects(type).filtered(`${primaryKeyField} == $0`, primaryKey);
+    if (results.length > 0) return results[0];
+    return this.create(type, { [primaryKeyField]: primaryKey }, ...listenerArgs);
+  }
+
+  /**
    * Deletes a specific object from the database.
    * @param  {Realm.Object} object  Object to be deleted, also can accept an array of Objects
    *                                of same type to be deleted.
