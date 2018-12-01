@@ -72,6 +72,20 @@ export class Database {
   }
 
   /**
+   * Returns the database object with the given id.
+   * @param  {string} type             The type of database object
+   * @param  {string} primaryKey       The primary key of the database object, usually its id
+   * @param  {string} primaryKeyField  The field used as the primary key, defaults to 'id'
+   * @return {Realm.object}            The existing database object with the given
+   *                                   primary key, or null if it does not exist.
+   */
+  get(type, primaryKey, primaryKeyField = 'id') {
+    if (!primaryKey || primaryKey.length < 1) return null;
+    const results = this.objects(type).filtered(`${primaryKeyField} == $0`, primaryKey);
+    return (results.length > 0) ? results[0] : null;
+  }
+
+  /**
    * Returns the database object with the given id, if it exists, or creates a
    * placeholder with that id if it doesn't.
    * @param  {string} type             The type of database object
@@ -81,9 +95,8 @@ export class Database {
    *                                   primary key, or a placeholder if none
    */
   getOrCreate(type, primaryKey, primaryKeyField = 'id', ...listenerArgs) {
-    if (!primaryKey || primaryKey.length < 1) return null;
-    const results = this.objects(type).filtered(`${primaryKeyField} == $0`, primaryKey);
-    if (results.length > 0) return results[0];
+    const object = this.get(type, primaryKey, primaryKeyField);
+    if (object) return object; 
     return this.create(type, { [primaryKeyField]: primaryKey }, ...listenerArgs);
   }
 
