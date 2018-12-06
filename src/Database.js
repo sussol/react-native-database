@@ -95,6 +95,7 @@ export class Database {
    *                                   primary key, or a placeholder if none
    */
   getOrCreate(type, primaryKey, primaryKeyField = 'id', ...listenerArgs) {
+    if (!primaryKey || primaryKey.length < 1) return null;
     const record = this.get(type, primaryKey, primaryKeyField);
     if (record) return record; 
     return this.create(type, { [primaryKeyField]: primaryKey }, ...listenerArgs);
