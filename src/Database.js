@@ -12,7 +12,7 @@ export class Database {
    *                         new database(schema, { path: 'pathToFile.realm' });
    * @return {none}
    */
-  constructor(schema, extraFields) {
+  constructor(schema, extraFields = {}) {
     this.realm = new Realm({ ...extraFields, ...schema });
     this.listeners = new Map();
   }
