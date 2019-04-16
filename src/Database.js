@@ -8,10 +8,12 @@ export class Database {
    * Create a new database with the given schema.
    * @param  {object} schema Contains a schema and a schemaVersion, in the format
    *                         expected by Realm
+   * @param  {object} extraFields Extra fields to initialise realm database with
+   *                         new database(schema, { path: 'pathToFile.realm' });
    * @return {none}
    */
-  constructor(schema) {
-    this.realm = new Realm(schema);
+  constructor(schema, extraFields) {
+    this.realm = new Realm({ ...extraFields, ...schema });
     this.listeners = new Map();
   }
 
