@@ -1,6 +1,6 @@
 import Realm from 'realm';
 import { generateUUID } from './utilities';
-import { CHANGE_TYPES } from '../index';
+import { CHANGE_TYPES } from './constants';
 
 export class Database {
 
